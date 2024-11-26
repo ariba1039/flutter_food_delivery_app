@@ -27,7 +27,6 @@ class _OnboardScreenState extends State<OnboardScreen> {
                       top: -70,
                       left: 0,
                       right: 0,
-                      
                       child: Image.asset(
                         onboards[index].image,
                         width: 600,
@@ -38,7 +37,6 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     Positioned(
                       top: MediaQuery.of(context).size.height / 1.9,
                       child: Padding(
-
                         padding: const EdgeInsets.symmetric(
                           horizontal: 25,
                         ),
@@ -52,7 +50,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 15,),
+                            const SizedBox(
+                              height: 15,
+                            ),
                             Text(
                               onboards[index].text2,
                               style: const TextStyle(
@@ -67,7 +67,29 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     ),
                   ],
                 );
-              })
+              }),
+          Positioned(
+              child: Row(
+            children: [
+              ...List.generate(
+                onboards.length,
+                (index) => AnimatedContainer(
+                  duration: const Duration(
+                    microseconds: 250,
+                  ),
+                  height: 5,
+                  width: 50,
+                  margin: EdgeInsets.only(
+                    right: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: kpink,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ],
+          ))
         ],
       ),
     );
