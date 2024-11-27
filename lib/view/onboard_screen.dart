@@ -10,6 +10,7 @@ class OnboardScreen extends StatefulWidget {
 }
 
 class _OnboardScreenState extends State<OnboardScreen> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +69,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
                   ],
                 );
               }),
-          Positioned(
+          Positioned( 
+            bottom: 170, left: 25,
               child: Row(
             children: [
               ...List.generate(
@@ -79,12 +81,13 @@ class _OnboardScreenState extends State<OnboardScreen> {
                   ),
                   height: 5,
                   width: 50,
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     right: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: kpink,
-                    borderRadius: BorderRadius.circular(10),
+                    color: currentIndex == index ? Colors.white : Colors.white.withOpacity(0.5),
+                    
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
               ),
