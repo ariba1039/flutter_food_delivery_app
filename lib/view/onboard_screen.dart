@@ -82,7 +82,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
           Positioned(
             bottom: 170,
             left: 25,
-            child: FadeInUp(
+            child: FadeInRight(
               delay: const Duration(milliseconds: 500),
               child: Row(
                 children: [
