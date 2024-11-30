@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_app/model/products_model.dart';
+import 'package:flutter_food_delivery_app/provider/cart_provider.dart';
 import 'package:flutter_food_delivery_app/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 
 class FoodProductItems extends StatelessWidget {
@@ -12,7 +14,7 @@ class FoodProductItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    //CartProvider cartProvider = Provider.of<CartProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
@@ -134,7 +136,7 @@ class FoodProductItems extends StatelessWidget {
           right: 0,
           child: GestureDetector(
             onTap: () {
-              // cartProvider.addCart(productModel);
+               cartProvider.addCart(productModel);
             },
             child: Container(
               padding: const EdgeInsets.all(12),

@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_app/model/categories_model.dart';
 import 'package:flutter_food_delivery_app/model/products_model.dart';
 import 'package:flutter_food_delivery_app/utils/app_colors.dart';
+import 'package:flutter_food_delivery_app/view/cart_screen.dart';
 import 'package:flutter_food_delivery_app/widgets/food_products_item.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/cart_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,11 +45,131 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     return SafeArea(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        headerPart(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Row(
+            children: [
+              const Expanded(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Your Location , ",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black45,
+                          ),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_down,
+                          color: kblack,
+                          size: 20,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          color: korange,
+                          size: 20,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Ariba , Germany ",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: kblack),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(
+                      Icons.search,
+                      color: kblack,
+                    ),
+                  ),
+                  Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.symmetric(
+                          vertical: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black12,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Icon(
+                          Icons.shopping_cart_outlined,
+                          color: kblack,
+                        ),
+                      ),
+                      cartProvider.carts.isNotEmpty
+                          ? Positioned(
+                              right: 0,
+                              top: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const CartScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFf95f60),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Text(
+                                    cartProvider.carts.length.toString(),
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
         const SizedBox(
           height: 35,
         ),
@@ -101,8 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.only(right: 10),
                   child: GestureDetector(
                     onTap: () {
-                
-                     filterProductByCategory(myCategories[index].name);
+                      filterProductByCategory(myCategories[index].name);
                     },
                     child: Container(
                       height: 120,
@@ -198,121 +321,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     ));
-  }
-
-  Padding headerPart() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        children: [
-          const Expanded(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Your Location , ",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black45,
-                      ),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: kblack,
-                      size: 20,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      color: korange,
-                      size: 20,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "Ariba , Germany ",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: kblack),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black12,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Icon(
-                  Icons.search,
-                  color: kblack,
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 15,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black12,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Icon(
-                      Icons.shopping_cart_outlined,
-                      color: kblack,
-                    ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: GestureDetector(
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFf95f60),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Text(
-                          "0",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          )
-        ],
-      ),
-    );
   }
 }
