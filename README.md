@@ -2,6 +2,8 @@
 # Flutter Food delivery app
 
 In this Repo, I'll build a Flutter Food Delivery App from scratch, integrating Flutter Provider for efficient state management. This step-by-step tutorial is perfect for beginners and those looking to deepen their understanding of Flutter Provider. Join us to level up your Flutter development skills.
+![food_app](https://github.com/user-attachments/assets/2fe09c68-79ae-4182-a920-37c834e21a46)
+
 
 
 ## Installation
