@@ -1,65 +1,64 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_app/model/cart_model.dart';
 import 'package:flutter_food_delivery_app/provider/cart_provider.dart';
 import 'package:flutter_food_delivery_app/utils/app_colors.dart';
 import 'package:flutter_food_delivery_app/widgets/cart_items.dart';
+
 import 'package:provider/provider.dart';
 
-class CartScreen extends StatefulWidget {
+
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
-  @override
   Widget build(BuildContext context) {
-      CartProvider cartProvider = Provider.of<CartProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     List<CartModel> carts = cartProvider.carts.reversed.toList();
     return Scaffold(
       backgroundColor: kbgColor,
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 25,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(5),
+          child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black12,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Icon(
-                          Icons.arrow_back_ios_new_outlined,
-                          color: Colors.black,
-                        ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: kblack,
                       ),
                     ),
                   ),
-                  const Text(
-                    "My Cart",
-                    style: TextStyle(
-                      color: kblack,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22,
-                    ),
+                ),
+                const Text(
+                  "My Cart",
+                  style: TextStyle(
+                    color: kblack,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
                   ),
-                  const SizedBox(),
-                ],
-              ),
-            ),Expanded(
+                ),
+                const SizedBox(),
+              ],
+            ),
+          ),
+          Expanded(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
@@ -96,9 +95,90 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
           ),
-          ],
-        ),
-      ),
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      "Delivery",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: kblack,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: DottedLine(
+                        dashLength: 10,
+                        dashColor: kblack.withOpacity(0.5),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    const Text(
+                      "\$5.99",
+                      style: TextStyle(
+                        color: korange,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    const Text(
+                      "Total Order",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: kblack,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: DottedLine(
+                        dashLength: 10,
+                        dashColor: kblack.withOpacity(0.5),
+                      ),
+                    ),
+                    Text(
+                      "\$${(cartProvider.totalCart()).toStringAsFixed(2)}",
+                      style: const TextStyle(
+                        color: korange,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 40),
+                MaterialButton(
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  color: kblack,
+                  height: 75,
+                  minWidth: MediaQuery.of(context).size.width - 50,
+                  child: Text(
+                    " Pay \$${(cartProvider.totalCart() + 5.99).toStringAsFixed(2)}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

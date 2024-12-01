@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   animate_do: ^3.3.4
   provider: ^6.1.2
+  dotted_line: ^3.2.3
 
 dev_dependencies:
   flutter_test:
