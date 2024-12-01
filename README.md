@@ -1,6 +1,9 @@
 
-# Generating flavors has never been this easy Flutter Flavors 2024
-In this Repo, I'll build a Flutter Food Delivery App from scratch, integrating Flutter Provider for efficient state management. This step-by-step tutorial is perfect for beginners and those looking to deepen their understanding of Flutter Provider. Join us to level up your Flutter development skills.
+# Flutter Food delivery app
+
+In this Repo, I'll build a Flutter Food Delivery App from scratch, integrating Flutter Provider for efficient state management, flutter animations and pixel perfect ui design . This step-by-step tutorial is perfect for beginners and those looking to deepen their understanding of Flutter Provider. Join us to level up your Flutter development skills.
+![food_app](https://github.com/user-attachments/assets/2fe09c68-79ae-4182-a920-37c834e21a46)
+
 
 
 ## Installation
@@ -21,10 +24,7 @@ flutter pub get
 ```bash
 flutter run
 ```
-4.UI Design:
-```bash
- Dribble : https://dribbble.com/shots/18302635-Food-Delivery-App-Foodel
-```
+
 # 💬 Contact
 If you have any questions or feedback, feel free to reach out:
 
